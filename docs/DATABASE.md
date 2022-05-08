@@ -1,6 +1,6 @@
 # Database <!-- omit in toc -->
 
-Author: Christian Nøddeboe - 02/05/2022
+Author: Angercraft - 08/05/2022
 
 <br/>
 
