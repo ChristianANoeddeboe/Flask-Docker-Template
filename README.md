@@ -7,19 +7,6 @@
 
 # Getting Started
 
-## Cloning the project
-
-Clone the project as you normally would to get the files included in the main module.
-The repository includes submodules which will not automatically be cloned along with it. To ensure everything is provided run the following commands.
-
-```
-git submodule init
-git submodule update
-```
-
-If the project is already setup, but no git commands work (other than git status) then the following might fix the problem.
-git remote set-url origin https://github-username:github-access-token@github.com/Vaerks/docker-ecommerce-backend.git
-
 ## Running the project
 
 If this is a fresh setup, start by generating the certificates needed by nginx, by running:
