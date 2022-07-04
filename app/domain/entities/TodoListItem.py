@@ -1,5 +1,6 @@
-from app.core.common.BaseAuditableEntity import BaseAuditableEntity
-from app.core.entities.TodoList import TodoList
+
+from app.domain.common.BaseAuditableEntity import BaseAuditableEntity
+from app.domain.entities.TodoList import TodoList
 
 
 class TodoListItem(BaseAuditableEntity):

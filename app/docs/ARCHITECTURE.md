@@ -4,7 +4,7 @@
 
 If you like videoes, then have fun https://www.youtube.com/watch?v=5OtUm1BLmG0
 
-### Core/Domain Layer:
+### Domain Layer:
 
 Contains enterprise-wide logic and types.
 

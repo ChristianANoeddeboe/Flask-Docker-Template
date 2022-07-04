@@ -2,19 +2,10 @@ import os
 
 from flask import Flask, make_response
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from app.configs.DB import Config as DBConfig, db
 from app.api import base_api
 
 web_app = Flask("Flask app")
 CORS(web_app, max_age=86400)
-web_app.config.from_object(DBConfig)
-db.init_app(web_app)
-migrate = Migrate(web_app, db)
-
-import app.models
-
 web_app.register_blueprint(base_api)
 
 @web_app.route('/api/heartbeat')
