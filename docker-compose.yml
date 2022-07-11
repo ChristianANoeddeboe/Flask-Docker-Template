@@ -19,13 +19,13 @@ services:
   #   volumes:
   #     - flask_postgres:/var/lib/postgres
   #     #- ./app/init/old:/docker-entrypoint-initdb.d
-  flask:
-    container_name: flask
+  app:
+    container_name: app
     build:
       context: ./app
       dockerfile: Dockerfile
     restart: always
-    command: flask run --host=0.0.0.0
+    command: uvicorn app:app --reload --host 0.0.0.0 --port 5000
     logging:
       options:
         max-size: "10m"
@@ -39,9 +39,6 @@ services:
     networks:
       - backend
     environment:
-      FLASK_ENV: development
-      FLASK_APP: app
-      FLASK_PORT: 5000
       DB_HOST: db
       DB_PORT: 3306
       DB_USER: root
