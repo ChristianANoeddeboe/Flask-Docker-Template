@@ -19,13 +19,13 @@ services:
   #   volumes:
   #     - flask_postgres:/var/lib/postgres
   #     #- ./app/init/old:/docker-entrypoint-initdb.d
-  app:
-    container_name: app
+  backend:
+    container_name: backend
     build:
-      context: ./app
+      context: ./backend
       dockerfile: Dockerfile
     restart: always
-    command: uvicorn app:app --reload --host 0.0.0.0 --port 5000
+    command: uvicorn backend.api.app:app --reload --host 0.0.0.0 --port 5000 #python3 -m app.api
     logging:
       options:
         max-size: "10m"
@@ -33,7 +33,7 @@ services:
     stdin_open: true # docker run -i
     tty: true # docker run -t
     volumes:
-      - ./app:/usr/app
+      - ./backend:/usr/backend
     ports:
       - 5000:5000
     networks:
