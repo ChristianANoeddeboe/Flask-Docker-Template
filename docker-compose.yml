@@ -1,31 +1,31 @@
 version: "3.9"
 
 services:
-  db:
-    image: postgres:14-alpine
-    container_name: postgres
-    restart: always
-    environment:
-      POSTGRES_DB: database
-      POSTGRES_PASSWORD: toor
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
-    ports:
-      - 3306:3306
-    networks:
-      - backend
-    volumes:
-      - flask_postgres:/var/lib/postgres
-      #- ./app/init/old:/docker-entrypoint-initdb.d
-  flask:
-    container_name: flask
+  # db:
+  #   image: postgres:14-alpine
+  #   container_name: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: database
+  #     POSTGRES_PASSWORD: toor
+  #   logging:
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "3"
+  #   ports:
+  #     - 3306:3306
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - flask_postgres:/var/lib/postgres
+  #     #- ./app/init/old:/docker-entrypoint-initdb.d
+  backend:
+    container_name: backend
     build:
-      context: ./app
+      context: ./backend
       dockerfile: Dockerfile
     restart: always
-    command: flask run --host=0.0.0.0
+    command: uvicorn backend.api.app:app --reload --host 0.0.0.0 --port 5000 #python3 -m app.api
     logging:
       options:
         max-size: "10m"
@@ -33,32 +33,28 @@ services:
     stdin_open: true # docker run -i
     tty: true # docker run -t
     volumes:
-      - ./app:/usr/app
+      - ./backend:/usr/backend
     ports:
       - 5000:5000
     networks:
       - backend
     environment:
-      FLASK_ENV: development
-      FLASK_APP: app
-      FLASK_PORT: 5000
       DB_HOST: db
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: toor
       DB_DB: database
       VERSION: 1
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
 
 networks:
   backend:
     name: backend_network
-
-volumes:
-  flask_postgres:
-    # driver: local
-    # driver_opts:
-    #   type: "none"
-    #   o: "bind"
-    #   device: "./userdata"
+#volumes:
+#flask_postgres:
+# driver: local
+# driver_opts:
+#   type: "none"
+#   o: "bind"
+#   device: "./userdata"

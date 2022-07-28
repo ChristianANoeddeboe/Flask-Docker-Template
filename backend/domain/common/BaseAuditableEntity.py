@@ -1,7 +1,9 @@
 
 from datetime import datetime
 
-class BaseAuditableEntity:
+from pydantic import BaseModel
+
+class BaseAuditableEntity(BaseModel):
 
     created: datetime
     created_by: str = None
