@@ -1,7 +1,7 @@
 
 
 from typing import Optional
-from MediatP.IRequestHandler import IRequestHandler
+from Medipy.IRequestHandler import IRequestHandler
 from backend.application.common.interfaces.IApplicationDbContext import IApplicationDbContext
 from backend.domain.entities.TodoList import TodoList
 

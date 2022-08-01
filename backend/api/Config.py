@@ -1,4 +1,4 @@
 
 class Config():
 
-    services
+    BASE_URL = "/api"

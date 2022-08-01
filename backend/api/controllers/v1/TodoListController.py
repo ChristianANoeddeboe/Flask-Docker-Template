@@ -6,11 +6,11 @@ from Medipy.ISender import ISender
 from Medipy.Mediator import Mediator
 from backend.application.TodoItems.commands.CreateTodoList.CreateTodoListCommand import CreateTodoListCommand
 from backend.domain.entities.TodoList import TodoList
-
+from backend.api.ApplicationAPIContext import application_api_context
 
 router = APIRouter()
 
-Mediator: ISender = Mediator()
+Mediator: ISender = application_api_context.get_request_handler_service()
 
 # Get all todolists
 @router.get("/")
@@ -20,7 +20,7 @@ async def get_todolists():
 # Get a todolist
 @router.get("/{todolist_id}")
 async def get_todolist(todolist_id: int):
-    todolist = TodoList(id=todolist_id, created=datetime.now(), title="TodoList 1")
+    todolist = Mediator.send(GetTodoListCommand())
     return todolist
 
 @router.post("/")
