@@ -12,7 +12,7 @@ httptools==0.4.0
 idna==3.3
 itsdangerous==2.1.2
 MarkupSafe==2.1.1
-medipy @ git+https://github.com/ChristianANoeddeboe/MediPy.git@93f67a4b34c2ffa9f0eabee92242afa13974b433
+medipy @ git+https://github.com/ChristianANoeddeboe/MediPy.git
 orjson==3.7.7
 pydantic==1.9.1
 python-dotenv==0.20.0
@@ -21,6 +21,7 @@ requests==2.28.1
 six==1.16.0
 sniffio==1.2.0
 starlette==0.19.1
+SQLAlchemy==1.4.39
 typing_extensions==4.3.0
 ujson==5.4.0
 urllib3==1.26.10

@@ -1,9 +1,8 @@
 
+from backend.infrastructure.models.BaseModel import BaseModel
 
-from backend.domain.entities.TodoListItem import TodoListItem
 
-
-class TodoListItemModel(db.Model, TodoListItem):
+class TodoListItemModel(BaseModel):
 
     __tablename__ = 'TODOLISTITEMS'
     

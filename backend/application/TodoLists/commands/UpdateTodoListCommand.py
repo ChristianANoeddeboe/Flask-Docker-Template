@@ -19,9 +19,7 @@ class CreateTodoListCommandHandler(IRequestHandler[CreateTodoListCommand, int]):
         self.__context = context
 
     async def handle(self, request: CreateTodoListCommand, cancellation_token=None) -> int:
-        entity = TodoList()
-
-        print(request.title)
+        entity = self.__context.TodoLists.find(lambda x: x.id == request.id)
 
         entity.title = request.title
 

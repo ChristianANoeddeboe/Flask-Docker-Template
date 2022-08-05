@@ -1,24 +1,30 @@
 version: "3.9"
 
 services:
-  # db:
-  #   image: postgres:14-alpine
-  #   container_name: postgres
-  #   restart: always
-  #   environment:
-  #     POSTGRES_DB: database
-  #     POSTGRES_PASSWORD: toor
-  #   logging:
-  #     options:
-  #       max-size: "10m"
-  #       max-file: "3"
-  #   ports:
-  #     - 3306:3306
-  #   networks:
-  #     - backend
-  #   volumes:
-  #     - flask_postgres:/var/lib/postgres
-  #     #- ./app/init/old:/docker-entrypoint-initdb.d
+  db:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: database
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - 45628:5432
+    networks:
+      - backend
+    volumes:
+      - database:/var/lib/postgres
+      #- ./app/init/old:/docker-entrypoint-initdb.d
+    secrets:
+      - db_root_password
+      - db_password
+
   backend:
     container_name: backend
     build:
@@ -40,21 +46,28 @@ services:
       - backend
     environment:
       DB_HOST: db
-      DB_PORT: 3306
+      DB_PORT: 8547
       DB_USER: root
-      DB_PASSWORD: toor
+      DB_PASSWORD: /run/secrets/db_password
       DB_DB: database
       VERSION: 1
-    # depends_on:
-    #   - db
+    secrets:
+      - db_password
+    depends_on:
+      - db
 
 networks:
   backend:
     name: backend_network
-#volumes:
-#flask_postgres:
-# driver: local
-# driver_opts:
-#   type: "none"
-#   o: "bind"
-#   device: "./userdata"
+volumes:
+  database:
+    # driver: local
+    # driver_opts:
+    #   type: "none"
+    #   o: "bind"
+    #   device: "./userdata"
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  db_root_password:
+    file: ./secrets/db_root_password.txt
