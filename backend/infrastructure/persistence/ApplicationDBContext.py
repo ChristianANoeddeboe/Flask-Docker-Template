@@ -9,8 +9,8 @@ from backend.domain.entities.TodoListItem import TodoListItem
 
 class ApplicationDbContext(IApplicationDbContext):
 
-    TodoLists: DbSet[TodoList]
-    TodoListItems: DbSet[TodoListItem]
+    TodoLists: DbSet[TodoList] = DbSet[TodoList]()
+    TodoListItems: DbSet[TodoListItem] = DbSet[TodoListItem]()
 
     async def save_changes_async(self, cancellation_token=None) -> Coroutine[int, None, None]:
         pass

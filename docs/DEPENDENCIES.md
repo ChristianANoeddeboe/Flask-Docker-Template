@@ -1,0 +1,7 @@
+# Dependencies:
+
+## App
+
+Flask
+
+##

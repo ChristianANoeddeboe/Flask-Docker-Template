@@ -1,8 +1,13 @@
 
+import math
+from random import random
+
+
 class ApplicationAPIContext():
 
     app_service = None
     request_handler_service = None
+    test = random()
 
     def register_application_service(self, application):
         self.app_service = application
@@ -20,3 +25,7 @@ class ApplicationAPIContext():
 
     
 application_api_context = ApplicationAPIContext()
+print(1)
+print(application_api_context.test)
+print(application_api_context)
+print(application_api_context.get_application_service())

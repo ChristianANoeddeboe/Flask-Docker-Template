@@ -22,3 +22,9 @@ class DbSet(set, Generic[_T]):
 
     async def find_all_async(self, func: Callable[[_T], bool]) -> list[_T]:
         return self.find_all(func)
+
+    async def to_list_async(self) -> list[_T]:
+        return list(self)
+
+    def to_list(self) -> list[_T]:
+        return list(self)
