@@ -8,10 +8,4 @@ class TodoListItem(BaseAuditableEntity):
     list_id: int
     title: str
     note: str
-    _done: bool
-
-    def is_done(self):
-        return self._done
-    
-    def set_done(self, value):
-        self._done = value
+    is_done: bool
